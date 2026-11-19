@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "ref": "AQA 4.1.1.2",
+    "topic": "Animal & Plant Cells",
+    "visualId": "mitochondria",
+    "question": "Which statement accurately describes the function of the highlighted organelle in a eukaryotic cell?",
+    "options": [
+      "It is the site of aerobic respiration, releasing energy for cellular processes.",
+      "It is the site of aerobic respiration, producing energy for cellular processes.",
+      "It is the site of anaerobic respiration, releasing energy as glucose.",
+      "It is the site of protein synthesis, releasing energy from amino acids."
+    ],
+    "correctIndex": 0,
+    "clue": "In AQA mark schemes, energy is never 'produced' or 'created'—watch the exact verb before 'energy'.",
+    "explanation": "AQA penalises saying mitochondria 'produce' or 'make' energy. Mitochondria are the site of aerobic respiration, which releases energy from glucose."
+  },
+  {
+    "id": 2,
+    "ref": "AQA 4.1.1.1",
+    "topic": "Eukaryotes & Prokaryotes",
+    "visualId": "prokaryote",
+    "question": "How is genetic material arranged inside a prokaryotic bacterial cell?",
+    "options": [
+      "As a single circular DNA loop free in the cytoplasm, often accompanied by small DNA rings called plasmids.",
+      "As a single circular DNA loop enclosed inside a cellulose nuclear membrane, alongside plasmids.",
+      "As linear chromosomes bound to histone proteins inside a membrane-bound nucleus, plus plasmids.",
+      "As multiple circular plasmids suspended inside the mitochondria and free in the cytoplasm."
+    ],
+    "correctIndex": 0,
+    "clue": "Prokaryotes lack any membrane-bound organelles—including a true nucleus and mitochondria.",
+    "explanation": "Prokaryotic cells have no nucleus; their genetic material is a single DNA loop free in the cytoplasm, and they may also contain one or more small rings of DNA called plasmids."
+  },
+  {
+    "id": 3,
+    "ref": "AQA 4.1.1.5",
+    "topic": "Microscopy & Calculations",
+    "visualId": "magnification",
+    "question": "A cheek cell image measures 24 mm across when viewed at a magnification of ×400. What is the actual diameter of the cell in micrometres (μm)?",
+    "options": [
+      "60 μm",
+      "6.0 μm",
+      "600 μm",
+      "0.06 μm"
+    ],
+    "correctIndex": 0,
+    "clue": "Convert 24 mm into micrometres first (1 mm = 1,000 μm), then divide by magnification.",
+    "explanation": "24 mm × 1,000 = 24,000 μm. Actual size = Image size ÷ Magnification = 24,000 ÷ 400 = 60 μm."
+  },
+  {
+    "id": 4,
+    "ref": "AQA 4.1.1.5",
+    "topic": "Microscopy Developments",
+    "visualId": "resolution",
+    "question": "Why has an electron microscope enabled biologists to understand far more sub-cellular structures than a light microscope?",
+    "options": [
+      "It has a much higher magnification and higher resolving power, allowing smaller internal structures to be distinguished.",
+      "It has a much higher magnification and lower resolving power, allowing living cells to be viewed in colour.",
+      "It uses beams of light with a shorter wavelength, increasing resolving power while keeping specimens alive.",
+      "It has higher resolving power because electrons have a longer wavelength than visible light waves."
+    ],
+    "correctIndex": 0,
+    "clue": "Higher resolution means greater ability to distinguish two close points—and electron microscopes cannot view live specimens.",
+    "explanation": "Electron microscopes provide much higher magnification and higher resolving power (resolution) than light microscopes, revealing fine sub-cellular structures such as ribosomes and mitochondrial cristae."
+  },
+  {
+    "id": 5,
+    "ref": "AQA 4.1.1.3",
+    "topic": "Cell Specialisation",
+    "visualId": "roothair",
+    "question": "Which combination of features adapts a root hair cell for its primary function in a plant?",
+    "options": [
+      "A long projection increasing surface area for water absorption by osmosis, and no chloroplasts as it is underground.",
+      "A long projection increasing surface area for photosynthesis, packed with chloroplasts near the cell wall.",
+      "A thick lignified cell wall to withstand high water pressure, with hollow ends forming a continuous tube.",
+      "A large permanent vacuole to absorb mineral ions by diffusion down a concentration gradient."
+    ],
+    "correctIndex": 0,
+    "clue": "Consider where root hair cells are located (underground) and how mineral ions vs. water enter the root.",
+    "explanation": "Root hair cells have a long projection to maximise surface area for absorbing water (by osmosis) and mineral ions (by active transport), and contain no chloroplasts because light does not penetrate soil."
+  },
+  {
+    "id": 6,
+    "ref": "AQA 4.1.2.2",
+    "topic": "Mitosis & The Cell Cycle",
+    "visualId": "mitosis",
+    "question": "Which sequence correctly describes what happens during the cell cycle leading to mitosis?",
+    "options": [
+      "Sub-cellular structures increase, DNA replicates to form two copies of each chromosome, then one set of chromosomes is pulled to each end of the cell before the cytoplasm divides.",
+      "DNA replicates to form two copies of each chromosome, the cytoplasm divides first, and then sub-cellular structures double in each daughter cell.",
+      "Chromosomes halve in number, DNA replicates once, and four genetically non-identical daughter cells are produced.",
+      "Sub-cellular structures decrease, homologous chromosomes pair up and exchange genes, and the nucleus divides twice."
+    ],
+    "correctIndex": 0,
+    "clue": "Mitosis produces two genetically identical diploid body cells—not four gametes.",
+    "explanation": "Before division, the cell grows, increases sub-cellular structures (ribosomes, mitochondria), and replicates its DNA. During mitosis, one set of chromosomes is pulled to each pole, followed by division of the cytoplasm and cell membrane."
+  },
+  {
+    "id": 7,
+    "ref": "AQA 4.1.2.3",
+    "topic": "Stem Cells",
+    "visualId": "meristem",
+    "question": "Why are stem cells from plant meristems particularly useful in agriculture and horticulture?",
+    "options": [
+      "They can differentiate into any type of plant cell throughout the plant's life, allowing rare species to be cloned quickly and economically.",
+      "They can only differentiate into xylem and phloem tissue, preventing viral infections from spreading between crops.",
+      "They are embryonic cells that lose the ability to differentiate once the plant reaches maturity.",
+      "They produce genetically varied offspring by meiosis, increasing resistance to fungal pathogens."
+    ],
+    "correctIndex": 0,
+    "clue": "Unlike most animal cells, plant cells retain the ability to differentiate throughout their entire life.",
+    "explanation": "Meristem tissue in plants can differentiate into any type of plant cell at any stage of the plant's life, making it ideal for cloning rare plants or producing identical disease-resistant crops."
+  },
+  {
+    "id": 8,
+    "ref": "AQA 4.1.3.1",
+    "topic": "Diffusion",
+    "visualId": "diffusion",
+    "question": "Which definition of diffusion matches the exact AQA GCSE mark scheme?",
+    "options": [
+      "The spreading out of the particles of any substance in solution, or particles of a gas, resulting in a net movement from an area of higher concentration to an area of lower concentration.",
+      "The active movement of water molecules from an area of lower concentration to an area of higher concentration across a partially permeable membrane.",
+      "The net movement of particles in a solid or gas from a region of lower concentration to a region of higher concentration using energy from respiration.",
+      "The spreading out of solute particles only, resulting in a one-way movement until all particles stop moving completely."
+    ],
+    "correctIndex": 0,
+    "clue": "Diffusion is passive (no energy needed) and involves a 'net movement'—particles keep moving randomly even at equilibrium.",
+    "explanation": "AQA defines diffusion as the spreading out of particles of any substance in solution, or particles of a gas, resulting in a net movement from an area of higher concentration to an area of lower concentration."
+  },
+  {
+    "id": 9,
+    "ref": "AQA 4.1.3.2",
+    "topic": "Osmosis (Required Practical)",
+    "visualId": "osmosis",
+    "question": "A potato cylinder is placed into a highly concentrated sucrose solution. What happens to the potato cells and why?",
+    "options": [
+      "They lose mass because water moves out of the cells from a dilute solution to a more concentrated solution through a partially permeable membrane.",
+      "They lose mass because sucrose molecules diffuse into the cells from a dilute solution to a more concentrated solution.",
+      "They gain mass because water moves into the cells from a concentrated solution to a more dilute solution by osmosis.",
+      "They lose mass because water moves out of the cells from a concentrated solution to a more dilute solution through a fully permeable cell wall."
+    ],
+    "correctIndex": 0,
+    "clue": "Remember: osmosis is the movement of WATER from a dilute solution (high water concentration) to a more concentrated solution (low water concentration).",
+    "explanation": "Inside the potato cell is a more dilute solution than the surrounding concentrated sucrose solution, so water moves out of the cells by osmosis across the partially permeable membrane, decreasing the mass."
+  },
+  {
+    "id": 10,
+    "ref": "AQA 4.1.3.3",
+    "topic": "Active Transport",
+    "visualId": "activetransport",
+    "question": "How does active transport differ from both diffusion and osmosis?",
+    "options": [
+      "It moves substances from a more dilute solution to a more concentrated solution (against a concentration gradient) and requires energy from respiration.",
+      "It moves substances from a more concentrated solution to a more dilute solution (down a concentration gradient) and requires energy from respiration.",
+      "It moves water molecules only against a concentration gradient without requiring energy from cellular respiration.",
+      "It moves substances down a concentration gradient through carrier proteins using kinetic energy of particles alone."
+    ],
+    "correctIndex": 0,
+    "clue": "Think of salmon swimming upstream: 'against' the gradient requires ATP energy from respiration.",
+    "explanation": "Active transport moves substances from a more dilute solution to a more concentrated solution (against a concentration gradient), which requires energy released by respiration."
+  }
+]

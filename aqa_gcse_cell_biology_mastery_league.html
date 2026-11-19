@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQA GCSE Cell Biology: Mastery & League</title>
+  <!-- Google Fonts: Inter & JetBrains Mono for scientific numbers/units -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slateDark: '#0f172a',
+            slateCard: '#1e293b',
+            tealGlow: '#14b8a6',
+            purpleGlow: '#a855f7',
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 4s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom subtle grid & glow utilities */
+    body {
+      background-color: #0b1120;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    .glow-teal {
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.25);
+    }
+    .glow-purple {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.35);
+    }
+    .glow-crimson {
+      box-shadow: 0 0 22px rgba(244, 63, 94, 0.35);
+    }
+    .svg-pulse-ring {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: ringPulse 2s ease-out infinite;
+    }
+    @keyframes ringPulse {
+      0% { transform: scale(0.85); opacity: 0.9; }
+      70% { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+    /* Custom scrollbar for review list */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-teal-500/30 selection:text-teal-200 flex flex-col">
+
+  <!-- TOP HEADER BAR -->
+  <header class="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 sm:px-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Title & Spec Badge -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center shadow-lg shadow-teal-500/20 shrink-0">
+          <!-- DNA / Cell SVG Icon -->
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9" stroke-opacity="0.85" />
+            <circle cx="12" cy="12" r="3.5" fill="currentColor" fill-opacity="0.35" />
+            <path stroke-linecap="round" d="M12 3v2M12 19v2M3 12h2M19 12h2" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-tight">
+            AQA GCSE Cell Biology: <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-400">Mastery</span>
+          </h1>
+          <div class="flex items-center gap-2 text-xs text-slate-400">
+            <span id="header-student-info" class="hidden sm:inline text-teal-300 font-semibold">Guest Mode</span>
+            <span id="header-class-badge" class="hidden px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30 text-purple-300 font-mono text-[11px]">Class 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar (Desktop Center - visible during quiz) -->
+      <div id="header-progress-wrap" class="hidden order-3 md:order-2 w-full md:w-1/3 lg:w-2/5 flex-col gap-1">
+        <div class="flex justify-between text-xs font-semibold text-slate-300">
+          <span id="progress-label">Question 1 of 10</span>
+          <span id="progress-percent" class="text-teal-400 font-mono">10%</span>
+        </div>
+        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/70">
+          <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-teal-400 via-cyan-400 to-purple-500 transition-all duration-500 ease-out" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Gamified Metrics & League Button -->
+      <div class="order-2 md:order-3 flex items-center gap-2 sm:gap-2.5">
+        <!-- Live Quiz Stats (hidden on login) -->
+        <div id="header-live-stats" class="hidden items-center gap-2">
+          <!-- Streak Counter -->
+          <div id="streak-badge" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700 text-amber-400 font-bold text-xs sm:text-sm transition-all duration-300" title="Current Answer Streak">
+            <svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24">
+              <path d="M12 2c.5 3.5-1.5 5.5-1.5 5.5s2.5-.5 4 2c1.5 2.5.5 6.5-2.5 8.5 1-2 .5-4-1-5-1 2.5-3.5 3-3.5 5.5 0 1.5 1 2.5 2 3-3.5-.5-6-3.5-6-7.5 0-4.5 4-7.5 8.5-12z"/>
+            </svg>
+            <span id="streak-count" class="font-mono">0</span>
+          </div>
+
+          <!-- Score Badge -->
+          <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/90 border border-teal-500/30 text-teal-300 font-bold text-xs sm:text-sm">
+            <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="score-count" class="font-mono">0/10</span>
+          </div>
+
+          <!-- Timer Toggle Button -->
+          <button id="timer-toggle-btn" onclick="toggleTimerMode()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer" title="Toggle 45s Question Timer">
+            <svg id="timer-icon" class="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="13" r="8" />
+              <path stroke-linecap="round" d="M12 9v4l2.5 2.5M9 2h6" />
+            </svg>
+            <span id="timer-text" class="font-mono">45s</span>
+          </button>
+        </div>
+
+        <!-- League Table Toggle Button -->
+        <button onclick="openLeagueModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 hover:from-amber-500/30 hover:to-purple-500/30 border border-amber-400/40 text-amber-300 text-xs font-bold transition cursor-pointer shadow-sm">
+          <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4m-5-9a5 5 0 0110 0v1a3 3 0 01-3 3H10a3 3 0 01-3-3v-1zm-2-2h2m10 0h2" />
+          </svg>
+          <span>League Table</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Countdown Timer Bar (visible during quiz) -->
+    <div id="header-timer-track" class="hidden max-w-7xl mx-auto mt-2.5">
+      <div class="w-full h-1.5 bg-slate-800/80 rounded-full overflow-hidden">
+        <div id="timer-bar" class="h-full bg-gradient-to-r from-purple-500 to-teal-400 transition-all duration-200 ease-linear" style="width: 100%;"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCREEN 1: STUDENT LOGIN & CLASS SELECTION -->
+  <section id="login-screen" class="flex-1 flex items-center justify-center px-4 py-8 sm:px-6">
+    <div class="max-w-lg w-full bg-slate-800/85 backdrop-blur-md border border-slate-700/90 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-teal-400 via-purple-500 to-teal-400"></div>
+
+      <div class="text-center mb-6">
+        <span id="sync-status-pill" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold mb-3">
+          <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+          AQA Topic 1 • Cell Biology Challenge
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Student Check-In</h2>
+        <p class="text-slate-300 text-sm mt-1.5">
+          Enter your name and class to record your score on the live multi-class league table.
+        </p>
+      </div>
+
+      <form id="login-form" onsubmit="handleStudentLogin(event)" class="space-y-4">
+        <!-- Student Name -->
+        <div>
+          <label for="student-name-input" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+            Student Name / Skool Handle
+          </label>
+          <input
+            id="student-name-input"
+            type="text"
+            required
+            maxlength="32"
+            placeholder="e.g. Maya Patel"
+            class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 text-white placeholder-slate-500 text-sm font-medium outline-none transition"
+          />
+        </div>
+
+        <!-- Class Dropdown -->
+        <div>
+          <label for="student-class-select" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+            Select Your Class
+          </label>
+          <div class="relative">
+            <select
+              id="student-class-select"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 text-white text-sm font-medium outline-none appearance-none cursor-pointer transition"
+            >
+              <!-- Populated dynamically from CONFIG.CLASSES -->
+            </select>
+            <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Optional Passcode Field (shown if CONFIG.CLASS_PASSCODE is set) -->
+        <div id="passcode-field-wrap" class="hidden">
+          <label for="student-passcode-input" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+            Class Access PIN
+          </label>
+          <input
+            id="student-passcode-input"
+            type="password"
+            placeholder="Enter class PIN"
+            class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 focus:border-amber-400 focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 text-sm font-mono outline-none transition"
+          />
+        </div>
+
+        <!-- Inline Validation Message -->
+        <div id="login-error-box" class="hidden p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200 text-xs font-medium"></div>
+
+        <!-- Primary Actions -->
+        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+          <button type="submit" class="flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-teal-500 to-purple-600 hover:from-teal-400 hover:to-purple-500 text-white font-bold text-sm shadow-lg shadow-teal-500/20 transition transform active:scale-95 cursor-pointer flex items-center justify-center gap-2">
+            <span>Start 10-Question Quiz</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+          <button type="button" onclick="openLeagueModal()" class="py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400/50 text-amber-300 font-bold text-sm transition cursor-pointer flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4m-5-9a5 5 0 0110 0v1a3 3 0 01-3 3H10a3 3 0 01-3-3v-1z" />
+            </svg>
+            <span>Rankings</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-[11px] text-slate-400">
+        <span>10 Higher-Tier AQA Questions</span>
+        <span>Ranked by Score → Fastest Time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: MAIN QUIZ WORKSPACE -->
+  <main id="quiz-workspace" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 py-6 sm:px-6 lg:py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+      
+      <!-- LEFT COLUMN: INTERACTIVE SVG VISUAL PANEL (5 cols on lg) -->
+      <section class="lg:col-span-5 bg-slate-800/70 backdrop-blur-sm border border-slate-700/80 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+        <!-- Decorative top glow line -->
+        <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-teal-500 via-purple-500 to-teal-500 opacity-80"></div>
+        
+        <div class="flex items-center justify-between mb-3">
+          <span id="visual-tag" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold tracking-wide uppercase">
+            <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
+            Interactive Specimen View
+          </span>
+          <span id="visual-scale" class="text-xs font-mono text-slate-400">Eukaryotic Model</span>
+        </div>
+
+        <!-- Dynamic SVG Diagram Container -->
+        <div id="svg-stage" class="w-full aspect-[4/3] bg-slate-900/90 rounded-xl border border-slate-700/80 flex items-center justify-center p-3 relative overflow-hidden shadow-inner">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Visual Caption / Microscope Legend -->
+        <div class="mt-3.5 p-3 rounded-xl bg-slate-900/70 border border-slate-700/60 flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-purple-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p id="visual-caption" class="text-xs text-slate-300 leading-relaxed">
+            Observe the highlighted structure and carefully distinguish exact AQA mark-scheme terminology.
+          </p>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: GCSE QUESTION & DISTRACTOR CARDS (7 cols on lg) -->
+      <section class="lg:col-span-7 flex flex-col gap-5">
+        
+        <!-- Question Card -->
+        <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/80 rounded-2xl p-5 sm:p-6 shadow-xl">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <span id="spec-tag" class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+              AQA GCSE Biology (8461/8464) • Higher Tier
+            </span>
+            <span id="topic-tag" class="text-xs font-medium text-slate-400">
+              1.1 Cell Structure
+            </span>
+          </div>
+
+          <h2 id="question-text" class="text-lg sm:text-xl font-bold text-white leading-snug">
+            Loading question...
+          </h2>
+
+          <!-- Lifelines Bar -->
+          <div class="mt-4 pt-3 border-t border-slate-700/60 flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs text-slate-400 italic">Tip: Read every word—options differ by key mark-scheme terms.</span>
+            <div class="flex items-center gap-2">
+              <button id="btn-5050" onclick="useFiftyFifty()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-semibold transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+                </svg>
+                50/50 Eliminate (<span id="fifty-left">1</span>)
+              </button>
+              <button id="btn-clue" onclick="useMarkSchemeClue()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-teal-950/60 border border-teal-500/40 text-teal-300 text-xs font-semibold transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+  <!-- SCREEN 3: END-OF-QUIZ SUMMARY SCREEN -->
+  <section id="summary-screen" class="hidden flex-1 max-w-5xl w-full mx-auto px-4 py-8 sm:px-6">
+    <div class="bg-slate-800/85 backdrop-blur-md border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      
+      <!-- Top Summary Banner -->
+      <div class="text-center max-w-2xl mx-auto">
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-3">
+          <span id="summary-student-pill" class="inline-block px-3.5 py-1 rounded-full bg-teal-500/15 border border-teal-500/30 text-teal-300 text-xs font-bold">
+            Student • Class 1
+          </span>
+          <span id="submission-status-badge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-bold">
+            Saving to League Table...
+          </span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Cell Biology Mastery Report</h2>
+        <p id="summary-verdict" class="text-slate-300 text-sm sm:text-base">
+          Great effort tackling the trickiest AQA mark-scheme distractors!
+        </p>
+      </div>
+
+      <!-- Key Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 my-7">
+        <div class="bg-slate-900/90 border border-teal-500/30 rounded-2xl p-4 sm:p-5 text-center glow-teal">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Final Score</p>
+          <p id="final-score" class="text-2xl sm:text-3xl font-extrabold text-teal-400 font-mono">0 / 10</p>
+          <p id="final-percentage" class="text-xs text-slate-400 mt-1">0% Accuracy</p>
+        </div>
+        <div class="bg-slate-900/90 border border-purple-500/30 rounded-2xl p-4 sm:p-5 text-center glow-purple">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">GCSE Estimate</p>
+          <p id="final-grade" class="text-2xl sm:text-3xl font-extrabold text-purple-400 font-mono">Grade 7</p>
+          <p id="grade-descriptor" class="text-xs text-slate-400 mt-1 truncate">Higher Tier</p>
+        </div>
+        <div class="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-4 sm:p-5 text-center">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Best Streak</p>
+          <p id="final-streak" class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono">0</p>
+          <p class="text-xs text-slate-400 mt-1">In a Row</p>
+        </div>
+        <div class="bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-4 sm:p-5 text-center">
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Total Time</p>
+          <p id="final-time" class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono">0s</p>
+          <p class="text-xs text-slate-400 mt-1">Tie-Breaker</p>
+        </div>
+      </div>
+
+      <!-- Review Section -->
+      <div class="mt-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-white">Question-by-Question Examiner Breakdown</h3>
+          <span id="missed-count-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700">
+            Reviewing all 10 questions
+          </span>
+        </div>
+        <div id="review-list" class="space-y-4 max-h-[26rem] overflow-y-auto pr-1">
+          <!-- Review items injected via JS -->
+        </div>
+      </div>
+
+      <!-- Play Again & League Actions -->
+      <div class="mt-8 pt-6 border-t border-slate-700/80 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <button onclick="openLeagueModal()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber-500/20 transition transform active:scale-95 cursor-pointer flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4m-5-9a5 5 0 0110 0v1a3 3 0 01-3 3H10a3 3 0 01-3-3v-1z" />
+          </svg>
+          View Live League Table
+        </button>
+        <button onclick="restartQuiz(true)" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-purple-600 hover:from-teal-400 hover:to-purple-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-teal-500/20 transition transform active:scale-95 cursor-pointer flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Try Again (Shuffled)
+        </button>
+        <button onclick="switchStudent()" class="px-5 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-semibold text-sm transition cursor-pointer">
+          Switch Student / Class
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL: LIVE MULTI-CLASS LEAGUE TABLE -->
+  <div id="league-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-slate-900 border border-slate-700/90 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-900/95">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/40 flex items-center justify-center text-amber-400">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4m-5-9a5 5 0 0110 0v1a3 3 0 01-3 3H10a3 3 0 01-3-3v-1zm-2-2h2m10 0h2" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-white">AQA Cell Biology League Table</h2>
+            <p id="league-data-source-label" class="text-xs text-slate-400">Ranked by Score → Fastest Completion Time</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="refreshLeagueData()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-teal-300 text-xs font-semibold transition cursor-pointer flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh
+          </button>
+          <button onclick="closeLeagueModal()" class="p-2 rounded-xl bg-slate-800 hover:bg-rose-950/60 border border-slate-700 hover:border-rose-500/40 text-slate-300 hover:text-rose-300 transition cursor-pointer" title="Close League Table">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sub-Tabs & Class Filter Bar -->
+      <div class="px-5 py-3.5 bg-slate-800/50 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <!-- View Switcher -->
+        <div class="inline-flex p-1 rounded-xl bg-slate-950 border border-slate-800">
+          <button id="tab-individual" onclick="switchLeagueTab('individual')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer bg-teal-500 text-slate-950">
+            Individual Leaderboard
+          </button>
+          <button id="tab-classes" onclick="switchLeagueTab('classes')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-slate-400 hover:text-white">
+            Class vs. Class Standings
+          </button>
+        </div>
+
+        <!-- Filter by Class Dropdown (visible on Individual tab) -->
+        <div id="league-class-filter-wrap" class="flex items-center gap-2">
+          <label for="league-class-filter" class="text-xs font-semibold text-slate-400">Filter:</label>
+          <select id="league-class-filter" onchange="renderLeagueViews()" class="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-semibold text-white outline-none focus:border-teal-400 cursor-pointer">
+            <option value="ALL">All Classes (1–10)</option>
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+      </div>
+
+      <!-- League Table Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+        <!-- Individual Table View -->
+        <div id="view-individual-table">
+          <div class="overflow-x-auto rounded-2xl border border-slate-800">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-950/90 text-[11px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                  <th class="py-3 px-4">Rank</th>
+                  <th class="py-3 px-4">Student</th>
+                  <th class="py-3 px-4">Class</th>
+                  <th class="py-3 px-4 text-right">Score</th>
+                  <th class="py-3 px-4 text-right">Streak</th>
+                  <th class="py-3 px-4 text-right">Time</th>
+                </tr>
+              </thead>
+              <tbody id="individual-tbody" class="divide-y divide-slate-800/70 text-sm">
+                <!-- Rows injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Class vs Class Standings View -->
+        <div id="view-classes-table" class="hidden">
+          <div class="overflow-x-auto rounded-2xl border border-slate-800">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-950/90 text-[11px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                  <th class="py-3 px-4">Rank</th>
+                  <th class="py-3 px-4">Class Name</th>
+                  <th class="py-3 px-4 text-right">Attempts</th>
+                  <th class="py-3 px-4 text-right">Avg Score</th>
+                  <th class="py-3 px-4 text-right">Top Score</th>
+                </tr>
+              </thead>
+              <tbody id="classes-tbody" class="divide-y divide-slate-800/70 text-sm">
+                <!-- Class rows injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 py-3 bg-slate-950/80 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+        <span id="league-footer-note">Showing combined local & live scores</span>
+        <button onclick="resetLocalDemoData()" class="text-slate-500 hover:text-rose-400 underline cursor-pointer transition">
+          Reset Local Demo Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION LOGIC & QUESTION BANK -->
+  <script>
+    /**
+     * =========================================================================
+     * TEACHER / OWNER CONFIGURATION BLOCK
+     * Edit the class names below whenever you are ready (keep quotes & commas).
+     * =========================================================================
+     */
+    const CONFIG = {
+      CLASSES: [
+        "Class 1",
+        "Class 2",
+        "Class 3",
+        "Class 4",
+        "Class 5",
+        "Class 6",
+        "Class 7",
+        "Class 8",
+        "Class 9",
+        "Class 10"
+      ],
+      // Paste your Google Apps Script Web App URL inside the quotes below for live cloud sync across all devices.
+      // Leave as "" to run in instant Local Demo Mode (pre-loaded with sample scores across Class 1-10).
+      GOOGLE_SCRIPT_URL: "",
+      // Optional shared PIN students must enter to join (leave "" for open access).
+      CLASS_PASSCODE: ""
+    };
+
+    /**
+     * Custom SVG Diagrams tailored to each AQA GCSE Cell Biology concept.
+     * Uses dark-mode neon teal (#14b8a6), purple (#a855f7), emerald (#10b981), and amber (#f59e0b).
+     */
+    const SVG_DIAGRAMS = {
+      mitochondria: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <defs>
+            <radialGradient id="cellGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </radialGradient>
+          </defs>
+          <!-- Animal Cell Membrane -->
+          <path d="M55,135 C50,65 110,25 185,30 C260,35 315,75 310,140 C305,205 250,245 175,240 C100,235 60,205 55,135 Z" fill="url(#cellGrad)" stroke="#334155" stroke-width="3"/>
+          <!-- Nucleus -->
+          <circle cx="135" cy="120" r="38" fill="#a855f7" fill-opacity="0.15" stroke="#a855f7" stroke-width="2"/>
+          <circle cx="135" cy="120" r="14" fill="#a855f7" fill-opacity="0.4"/>
+          <text x="135" y="172" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="Inter">Nucleus</text>
+          <!-- Ribosomes dots -->
+          <circle cx="95" cy="95" r="2.5" fill="#64748b"/>
+          <circle cx="185" cy="70" r="2.5" fill="#64748b"/>
+          <circle cx="215" cy="195" r="2.5" fill="#64748b"/>
+          <circle cx="110" cy="190" r="2.5" fill="#64748b"/>
+          <!-- Highlighted Mitochondrion 1 -->
+          <g transform="translate(235, 115) rotate(-25)">
+            <ellipse cx="0" cy="0" rx="36" ry="18" fill="#14b8a6" fill-opacity="0.25" stroke="#14b8a6" stroke-width="2.5"/>
+            <path d="M-26,0 Q-20,-12 -14,0 T-2,0 T10,0 T22,0" fill="none" stroke="#5eead4" stroke-width="2"/>
+            <circle cx="0" cy="0" r="42" fill="none" stroke="#14b8a6" stroke-width="1.5" class="svg-pulse-ring"/>
+          </g>
+          <!-- Secondary Mitochondrion -->
+          <g transform="translate(175, 195) rotate(15)">
+            <ellipse cx="0" cy="0" rx="28" ry="14" fill="#14b8a6" fill-opacity="0.15" stroke="#14b8a6" stroke-width="1.8"/>
+            <path d="M-18,0 Q-12,-9 -6,0 T6,0 T18,0" fill="none" stroke="#5eead4" stroke-width="1.5"/>
+          </g>
+          <!-- Callout Label -->
+          <line x1="255" y1="95" x2="285" y2="55" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <rect x="235" y="34" width="110" height="22" rx="6" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+          <text x="290" y="48" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="Inter">Organelle X</text>
+        </svg>
+      `,
+      prokaryote: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Slime Capsule & Cell Wall -->
+          <rect x="45" y="75" width="230" height="120" rx="60" fill="#1e293b" stroke="#a855f7" stroke-width="3" stroke-dasharray="6,3"/>
+          <rect x="53" y="83" width="214" height="104" rx="52" fill="#0f172a" stroke="#14b8a6" stroke-width="2.5"/>
+          <!-- Flagellum -->
+          <path d="M275,135 Q300,110 315,135 T350,135" fill="none" stroke="#a855f7" stroke-width="3" stroke-linecap="round"/>
+          <!-- Chromosomal DNA loop -->
+          <path d="M95,125 C85,100 135,95 145,120 C155,145 110,165 95,145 C80,125 130,115 135,135" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="118" y="172" text-anchor="middle" fill="#7dd3fc" font-size="9.5" font-family="Inter">Chromosomal DNA</text>
+          <!-- Highlighted Plasmids -->
+          <g transform="translate(205, 118)">
+            <circle cx="0" cy="0" r="13" fill="none" stroke="#14b8a6" stroke-width="2.5"/>
+            <circle cx="0" cy="0" r="20" fill="none" stroke="#14b8a6" stroke-width="1.5" class="svg-pulse-ring"/>
+          </g>
+          <circle cx="225" cy="152" r="10" fill="none" stroke="#14b8a6" stroke-width="2.2"/>
+          <!-- Callout -->
+          <line x1="215" y1="106" x2="250" y2="52" stroke="#14b8a6" stroke-width="1.5"/>
+          <rect x="200" y="30" width="125" height="22" rx="6" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+          <text x="262" y="44" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="Inter">Small DNA Rings</text>
+        </svg>
+      `,
+      magnification: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Microscope Field of View Circle -->
+          <circle cx="180" cy="135" r="105" fill="#090d16" stroke="#334155" stroke-width="3"/>
+          <!-- Grid lines -->
+          <line x1="75" y1="135" x2="285" y2="135" stroke="#1e293b" stroke-width="1"/>
+          <line x1="180" y1="30" x2="180" y2="240" stroke="#1e293b" stroke-width="1"/>
+          <!-- Cheek Cell Drawing -->
+          <path d="M135,125 C130,95 165,80 200,88 C230,95 235,130 220,155 C205,175 155,175 140,150 Z" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-width="2.5"/>
+          <circle cx="182" cy="128" r="11" fill="#a855f7" fill-opacity="0.5"/>
+          <!-- Dimension Measurement Arrows -->
+          <line x1="135" y1="190" x2="225" y2="190" stroke="#14b8a6" stroke-width="2.5"/>
+          <line x1="135" y1="183" x2="135" y2="197" stroke="#14b8a6" stroke-width="2"/>
+          <line x1="225" y1="183" x2="225" y2="197" stroke="#14b8a6" stroke-width="2"/>
+          <rect x="125" y="202" width="110" height="22" rx="6" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+          <text x="180" y="216" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="JetBrains Mono">Image = 36 mm</text>
+          <text x="180" y="56" text-anchor="middle" fill="#cbd5e1" font-size="10.5" font-weight="bold" font-family="JetBrains Mono">Magnification: ×450</text>
+        </svg>
+      `,
+      microscopy: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Split comparison: Light vs Electron -->
+          <rect x="24" y="36" width="146" height="198" rx="14" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+          <text x="97" y="58" text-anchor="middle" fill="#94a3b8" font-size="10.5" font-weight="bold" font-family="Inter">Light Microscope</text>
+          <circle cx="97" cy="125" r="42" fill="#0f172a" stroke="#64748b" stroke-width="2"/>
+          <circle cx="97" cy="125" r="12" fill="#64748b" fill-opacity="0.4"/>
+          <text x="97" y="192" text-anchor="middle" fill="#cbd5e1" font-size="9.5" font-family="Inter">Max ~ ×1,500</text>
+          <text x="97" y="208" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Inter">Lower Resolving Power</text>
+
+          <rect x="190" y="36" width="146" height="198" rx="14" fill="#1e293b" stroke="#14b8a6" stroke-width="2"/>
+          <text x="263" y="58" text-anchor="middle" fill="#5eead4" font-size="10.5" font-weight="bold" font-family="Inter">Electron Microscope</text>
+          <circle cx="263" cy="125" r="42" fill="#0f172a" stroke="#14b8a6" stroke-width="2"/>
+          <!-- Fine sub-cellular detail -->
+          <ellipse cx="263" cy="125" rx="24" ry="12" fill="#14b8a6" fill-opacity="0.25" stroke="#14b8a6" stroke-width="1.5"/>
+          <path d="M245,125 Q251,117 257,125 T269,125 T281,125" fill="none" stroke="#5eead4" stroke-width="1.5"/>
+          <circle cx="263" cy="125" r="28" fill="none" stroke="#14b8a6" stroke-width="1.2" class="svg-pulse-ring"/>
+          <text x="263" y="192" text-anchor="middle" fill="#5eead4" font-size="9.5" font-weight="bold" font-family="Inter">Max ~ ×2,000,000</text>
+          <text x="263" y="208" text-anchor="middle" fill="#99f6e4" font-size="9" font-family="Inter">Higher Resolution</text>
+        </svg>
+      `,
+      specialised: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Root Hair Cell Diagram -->
+          <rect x="45" y="75" width="95" height="120" rx="14" fill="#14b8a6" fill-opacity="0.15" stroke="#14b8a6" stroke-width="2.5"/>
+          <!-- Long projection -->
+          <path d="M140,115 L295,115 C312,115 312,145 295,145 L140,145" fill="#14b8a6" fill-opacity="0.15" stroke="#14b8a6" stroke-width="2.5"/>
+          <!-- Large Vacuole -->
+          <path d="M62,92 L122,92 L122,122 L285,122 C294,122 294,138 285,138 L122,138 L122,178 L62,178 Z" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <!-- Nucleus -->
+          <circle cx="88" cy="155" r="11" fill="#a855f7" fill-opacity="0.6"/>
+          <!-- Water & Mineral Ion Arrows -->
+          <path d="M235,82 L235,108" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M275,178 L275,152" stroke="#38bdf8" stroke-width="2"/>
+          <text x="235" y="72" text-anchor="middle" fill="#7dd3fc" font-size="9.5" font-weight="bold" font-family="Inter">H₂O + Mineral Ions</text>
+          <rect x="155" y="195" width="150" height="24" rx="6" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+          <text x="230" y="210" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="Inter">Root Hair Projection</text>
+        </svg>
+      `,
+      mitosis: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Stage 1: Interphase -->
+          <circle cx="72" cy="135" r="42" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+          <text x="72" y="80" text-anchor="middle" fill="#94a3b8" font-size="9.5" font-weight="bold" font-family="Inter">1. Growth & DNA</text>
+          <path d="M58,125 L86,145 M86,125 L58,145" stroke="#a855f7" stroke-width="2.5"/>
+          <path d="M62,120 L90,140 M90,120 L62,140" stroke="#14b8a6" stroke-width="2.5"/>
+          
+          <text x="128" y="139" text-anchor="middle" fill="#64748b" font-size="16">→</text>
+
+          <!-- Stage 2: Mitosis (Chromosomes pulled apart) -->
+          <ellipse cx="185" cy="135" rx="46" ry="38" fill="#1e293b" stroke="#a855f7" stroke-width="2.5"/>
+          <text x="185" y="80" text-anchor="middle" fill="#d8b4fe" font-size="9.5" font-weight="bold" font-family="Inter">2. Mitosis</text>
+          <path d="M162,122 L170,135 L162,148" fill="none" stroke="#14b8a6" stroke-width="2.5"/>
+          <path d="M208,122 L200,135 L208,148" fill="none" stroke="#14b8a6" stroke-width="2.5"/>
+          <ellipse cx="185" cy="135" rx="52" ry="44" fill="none" stroke="#a855f7" stroke-width="1.2" class="svg-pulse-ring"/>
+
+          <text x="244" y="139" text-anchor="middle" fill="#64748b" font-size="16">→</text>
+
+          <!-- Stage 3: Two Identical Daughter Cells -->
+          <circle cx="302" cy="102" r="28" fill="#1e293b" stroke="#14b8a6" stroke-width="2"/>
+          <path d="M294,95 L310,109 M310,95 L294,109" stroke="#14b8a6" stroke-width="2"/>
+          <circle cx="302" cy="168" r="28" fill="#1e293b" stroke="#14b8a6" stroke-width="2"/>
+          <path d="M294,161 L310,175 M310,161 L294,175" stroke="#14b8a6" stroke-width="2"/>
+          <text x="302" y="214" text-anchor="middle" fill="#5eead4" font-size="9.5" font-weight="bold" font-family="Inter">3. Cytokinesis</text>
+        </svg>
+      `,
+      stemcells: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Plant Shoot & Root Meristem -->
+          <path d="M180,45 C165,85 170,145 180,225" stroke="#10b981" stroke-width="5" stroke-linecap="round"/>
+          <!-- Leaves -->
+          <path d="M177,95 C140,75 115,90 130,110 C145,120 170,110 177,95 Z" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
+          <path d="M183,125 C220,105 245,120 230,140 C215,150 190,140 183,125 Z" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
+          <!-- Roots -->
+          <path d="M180,185 L145,220 M180,195 L215,225 M180,210 L165,240" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Glowing Meristem Tips -->
+          <circle cx="180" cy="45" r="10" fill="#14b8a6" fill-opacity="0.5" stroke="#14b8a6" stroke-width="2"/>
+          <circle cx="180" cy="45" r="18" fill="none" stroke="#14b8a6" stroke-width="1.5" class="svg-pulse-ring"/>
+          <circle cx="180" cy="225" r="10" fill="#14b8a6" fill-opacity="0.5" stroke="#14b8a6" stroke-width="2"/>
+          
+          <rect x="205" y="34" width="130" height="24" rx="6" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+          <text x="270" y="49" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="Inter">Meristem Tissue</text>
+        </svg>
+      `,
+      diffusion: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Alveolus / Membrane -->
+          <rect x="174" y="35" width="12" height="200" rx="6" fill="#334155" stroke="#64748b" stroke-width="1.5"/>
+          <text x="95" y="48" text-anchor="middle" fill="#5eead4" font-size="10.5" font-weight="bold" font-family="Inter">High Concentration</text>
+          <text x="265" y="48" text-anchor="middle" fill="#a855f7" font-size="10.5" font-weight="bold" font-family="Inter">Low Concentration</text>
+          <!-- High side particles -->
+          <circle cx="70" cy="90" r="7" fill="#14b8a6"/><circle cx="110" cy="80" r="7" fill="#14b8a6"/>
+          <circle cx="85" cy="125" r="7" fill="#14b8a6"/><circle cx="130" cy="115" r="7" fill="#14b8a6"/>
+          <circle cx="65" cy="165" r="7" fill="#14b8a6"/><circle cx="115" cy="160" r="7" fill="#14b8a6"/>
+          <circle cx="95" cy="195" r="7" fill="#14b8a6"/><circle cx="140" cy="185" r="7" fill="#14b8a6"/>
+          <!-- Low side particles -->
+          <circle cx="245" cy="105" r="7" fill="#14b8a6" fill-opacity="0.7"/>
+          <circle cx="285" cy="175" r="7" fill="#14b8a6" fill-opacity="0.7"/>
+          <!-- Net Movement Arrow -->
+          <path d="M135,135 L225,135" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+          <polygon points="225,128 240,135 225,142" fill="#f59e0b"/>
+          <rect x="120" y="212" width="120" height="22" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="180" y="226" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold" font-family="Inter">Net Diffusion Gradient</text>
+        </svg>
+      `,
+      osmosis: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Partially permeable membrane -->
+          <line x1="180" y1="35" x2="180" y2="235" stroke="#a855f7" stroke-width="4" stroke-dasharray="12,8"/>
+          <text x="90" y="46" text-anchor="middle" fill="#7dd3fc" font-size="10" font-weight="bold" font-family="Inter">Dilute Solution</text>
+          <text x="270" y="46" text-anchor="middle" fill="#f43f5e" font-size="10" font-weight="bold" font-family="Inter">Concentrated Sugar</text>
+          <!-- Large Sugar Molecules (cannot pass) -->
+          <circle cx="240" cy="95" r="14" fill="#f43f5e" fill-opacity="0.3" stroke="#f43f5e" stroke-width="2"/>
+          <circle cx="290" cy="135" r="14" fill="#f43f5e" fill-opacity="0.3" stroke="#f43f5e" stroke-width="2"/>
+          <circle cx="245" cy="180" r="14" fill="#f43f5e" fill-opacity="0.3" stroke="#f43f5e" stroke-width="2"/>
+          <circle cx="75" cy="145" r="14" fill="#f43f5e" fill-opacity="0.3" stroke="#f43f5e" stroke-width="2"/>
+          <!-- Small Water Molecules -->
+          <circle cx="70" cy="85" r="5" fill="#38bdf8"/><circle cx="115" cy="95" r="5" fill="#38bdf8"/>
+          <circle cx="135" cy="135" r="5" fill="#38bdf8"/><circle cx="110" cy="175" r="5" fill="#38bdf8"/>
+          <circle cx="65" cy="195" r="5" fill="#38bdf8"/><circle cx="215" cy="135" r="5" fill="#38bdf8"/>
+          <!-- Osmosis Arrow -->
+          <path d="M145,135 L205,135" stroke="#38bdf8" stroke-width="3"/>
+          <polygon points="205,129 217,135 205,141" fill="#38bdf8"/>
+          <rect x="95" y="212" width="170" height="22" rx="6" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="180" y="226" text-anchor="middle" fill="#d8b4fe" font-size="9.5" font-weight="bold" font-family="Inter">Partially Permeable Membrane</text>
+        </svg>
+      `,
+      activetransport: `
+        <svg viewBox="0 0 360 270" class="w-full h-full">
+          <!-- Phospholipid / Cell Membrane -->
+          <rect x="166" y="35" width="28" height="200" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+          <!-- Carrier Protein Gate -->
+          <rect x="158" y="112" width="44" height="46" rx="10" fill="#a855f7" fill-opacity="0.35" stroke="#a855f7" stroke-width="2.5"/>
+          <text x="90" y="48" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold" font-family="Inter">Soil (Low [Mineral])</text>
+          <text x="270" y="48" text-anchor="middle" fill="#5eead4" font-size="10" font-weight="bold" font-family="Inter">Root Hair (High [Mineral])</text>
+          <!-- Few ions outside -->
+          <circle cx="95" cy="135" r="7" fill="#f59e0b"/>
+          <circle cx="70" cy="175" r="7" fill="#f59e0b"/>
+          <!-- Many ions inside -->
+          <circle cx="245" cy="90" r="7" fill="#f59e0b"/><circle cx="285" cy="105" r="7" fill="#f59e0b"/>
+          <circle cx="255" cy="135" r="7" fill="#f59e0b"/><circle cx="295" cy="145" r="7" fill="#f59e0b"/>
+          <circle cx="245" cy="180" r="7" fill="#f59e0b"/><circle cx="280" cy="190" r="7" fill="#f59e0b"/>
+          <!-- Pumping Arrow + ATP/Energy Burst -->
+          <path d="M112,135 L235,135" stroke="#14b8a6" stroke-width="3"/>
+          <polygon points="235,129 247,135 235,141" fill="#14b8a6"/>
+          <rect x="128" y="172" width="104" height="24" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="180" y="187" text-anchor="middle" fill="#fcd34d" font-size="9.5" font-weight="bold" font-family="Inter">⚡ Energy (Respiration)</text>
+        </svg>
+      `
+    };
+
+    /**
+     * 10 Rigorous AQA GCSE Cell Biology Questions
+     * Every distractor mirrors authentic AQA wording, differing by critical mark-scheme distinctions.
+     */
+    const QUESTIONS = [
+      {
+        id: 1,
+        topic: "1.1 Eukaryotic & Prokaryotic Cells",
+        tier: "AQA GCSE Biology (8461/8464) • Foundation & Higher",
+        visualKey: "mitochondria",
+        visualScale: "Animal Cell (~20 µm)",
+        visualCaption: "Organelle X has a folded inner membrane and is abundant in active muscle and sperm cells.",
+        question: "Which statement accurately describes the function of Organelle X (mitochondrion) using exact AQA mark-scheme terminology?",
+        clue: "AQA examiners strictly penalise saying mitochondria 'produce' or 'make' energy—remember the conservation of energy!",
+        options: [
+          "It is the site of aerobic respiration, which releases energy for cellular processes.",
+          "It is the site of aerobic respiration, which produces energy for cellular processes.",
+          "It is the site of anaerobic respiration, which releases energy for protein synthesis.",
+          "It is the site of photosynthesis, which releases energy from glucose molecules."
+        ],
+        correctIndex: 0,
+        examinerNote: "In AQA mark schemes, energy cannot be 'produced' or 'made'—it is always 'released' during aerobic respiration. Option C incorrectly states anaerobic respiration (which occurs in the cytoplasm), and Option D confuses mitochondria with chloroplasts."
+      },
+      {
+        id: 2,
+        topic: "1.1 Prokaryotic Cell Structure",
+        tier: "AQA GCSE Biology (8461/8464) • Higher Tier",
+        visualKey: "prokaryote",
+        visualScale: "Bacterium (~2 µm)",
+        visualCaption: "Prokaryotic bacterial cells lack a true membrane-bound nucleus and contain two distinct forms of genetic material.",
+        question: "How is genetic material arranged inside a prokaryotic bacterial cell?",
+        clue: "Bacteria have one main loop of DNA floating in the cytoplasm, plus smaller circular rings that can be transferred between bacteria.",
+        options: [
+          "A single circular loop of DNA free in the cytoplasm, plus small rings of DNA called plasmids.",
+          "Linear chromosomes enclosed within a nucleus, plus small rings of DNA called plasmids.",
+          "A single circular loop of DNA enclosed within a nucleus, plus linear plasmid strands.",
+          "Multiple linear chromosomes free in the cytoplasm, surrounded by a cellulose cell wall."
+        ],
+        correctIndex: 0,
+        examinerNote: "Prokaryotes do NOT have a nucleus (ruling out B and C). Their chromosomal DNA is a single circular loop free in the cytoplasm, alongside extra small rings called plasmids. Bacterial cell walls are also not made of cellulose (unlike plants)."
+      },
+      {
+        id: 3,
+        topic: "1.1 Microscopy Calculations",
+        tier: "AQA GCSE Biology (8461/8464) • Maths Skill (MS 1b/2a)",
+        visualKey: "magnification",
+        visualScale: "Scale Conversion: 1 mm = 1,000 µm",
+        visualCaption: "A student measures the image diameter of a human cheek cell as 36 mm at a magnification of ×450.",
+        question: "Calculate the actual diameter of the cheek cell in micrometres (µm). Use: magnification = image size ÷ actual size.",
+        clue: "Convert 36 mm into micrometres first (multiply by 1,000) before dividing by the magnification of 450.",
+        options: [
+          "80 µm",
+          "8.0 µm",
+          "800 µm",
+          "0.08 µm"
+        ],
+        correctIndex: 0,
+        examinerNote: "Step 1: Actual size = 36 mm ÷ 450 = 0.08 mm (Option D forgets to convert units!). Step 2: Multiply by 1,000 to convert mm to µm: 0.08 × 1,000 = 80 µm."
+      },
+      {
+        id: 4,
+        topic: "1.1 Microscopy & Resolution",
+        tier: "AQA GCSE Biology (8461/8464) • Higher Tier",
+        visualKey: "microscopy",
+        visualScale: "Sub-cellular Ultrastructure",
+        visualCaption: "Comparing a standard school light microscope with a transmission electron microscope.",
+        question: "Why has the development of electron microscopes allowed biologists to understand sub-cellular structures such as ribosomes in greater detail?",
+        clue: "Focus on the scientific definition of 'resolving power' (distinguishing two close points) alongside higher magnification.",
+        options: [
+          "Electron microscopes have a much higher magnification and higher resolving power than light microscopes.",
+          "Electron microscopes have a much higher magnification and lower resolving power than light microscopes.",
+          "Electron microscopes allow living cells to be viewed in real time with higher resolving power.",
+          "Electron microscopes use shorter wavelengths of visible light to increase magnification."
+        ],
+        correctIndex: 0,
+        examinerNote: "AQA requires both 'higher magnification' AND 'higher resolving power (resolution)'. Option B gets resolution backwards, Option C is false (electron microscopes require a vacuum, killing specimens), and Option D is false because they use a beam of electrons, not visible light."
+      },
+      {
+        id: 5,
+        topic: "1.1 Cell Specialisation",
+        tier: "AQA GCSE Biology (8461/8464) • Foundation & Higher",
+        visualKey: "specialised",
+        visualScale: "Plant Root Epidermis",
+        visualCaption: "Root hair cells are adapted for the uptake of water by osmosis and mineral ions by active transport.",
+        question: "Which combination of adaptations enables a root hair cell to absorb water and mineral ions efficiently?",
+        clue: "Think about surface area for diffusion/osmosis, why chloroplasts are absent underground, and the energy demand of active transport.",
+        options: [
+          "A large surface area to speed up osmosis, no chloroplasts, and many mitochondria for active transport.",
+          "A large surface area to speed up osmosis, many chloroplasts, and no mitochondria for active transport.",
+          "A small surface area to reduce water loss, no chloroplasts, and many ribosomes for active transport.",
+          "A large surface area to speed up active transport, a thickened lignin wall, and many chloroplasts."
+        ],
+        correctIndex: 0,
+        examinerNote: "Root hair cells have a long projection giving a large surface area, lack chloroplasts (as they are underground in the dark), and contain many mitochondria to release energy for the active transport of mineral ions."
+      },
+      {
+        id: 6,
+        topic: "1.2 Cell Division & The Cell Cycle",
+        tier: "AQA GCSE Biology (8461/8464) • Higher Tier",
+        visualKey: "mitosis",
+        visualScale: "Eukaryotic Cell Cycle",
+        visualCaption: "Before a body cell divides by mitosis, it undergoes DNA replication and increases its sub-cellular structures.",
+        question: "Which statement accurately describes the stage of the cell cycle immediately BEFORE mitosis occurs?",
+        clue: "Remember the order: Growth & replication FIRST, then chromosome separation (mitosis), then cytoplasm division.",
+        options: [
+          "The cell grows, increases its number of mitochondria and ribosomes, and replicates its DNA to form two copies of each chromosome.",
+          "The cytoplasm and cell membrane divide to form two genetically identical diploid daughter cells.",
+          "One set of chromosomes is pulled to each end of the cell and the nucleus divides into two.",
+          "The cell grows, decreases its number of sub-cellular structures, and halves its chromosome number."
+        ],
+        correctIndex: 0,
+        examinerNote: "Before mitosis (Stage 1 of the cell cycle), the cell grows, increases sub-cellular structures (mitochondria, ribosomes), and replicates its DNA. Option B describes cytokinesis (the final stage), Option C describes mitosis itself, and Option D describes meiosis."
+      },
+      {
+        id: 7,
+        topic: "1.2 Stem Cells & Meristems",
+        tier: "AQA GCSE Biology (8461/8464) • Higher Tier",
+        visualKey: "stemcells",
+        visualScale: "Plant Growth Regions",
+        visualCaption: "Unlike adult animal stem cells (such as those in bone marrow), plant stem cells retain full differentiation potential throughout life.",
+        question: "Where are stem cells located in plants, and how do they differ from adult human bone marrow stem cells?",
+        clue: "Recall the specific AQA term for plant stem cell tissue at the tips of roots and shoots.",
+        options: [
+          "In meristem tissue; they can differentiate into any type of plant cell throughout the plant's entire life.",
+          "In meristem tissue; they can only differentiate into xylem and phloem cells during early germination.",
+          "In phloem tissue; they can differentiate into any type of plant cell throughout the plant's entire life.",
+          "In epidermal tissue; they differentiate exclusively into guard cells and root hair cells."
+        ],
+        correctIndex: 0,
+        examinerNote: "Plant stem cells are found in meristem tissue (at shoot and root tips) and can differentiate into ANY type of plant cell throughout the plant's entire life—unlike adult human bone marrow stem cells, which can only form specific cells like blood cells."
+      },
+      {
+        id: 8,
+        topic: "1.3 Transport in Cells: Diffusion",
+        tier: "AQA GCSE Biology (8461/8464) • Foundation & Higher",
+        visualKey: "diffusion",
+        visualScale: "Alveolar Gas Exchange",
+        visualCaption: "Net movement of particles occurs passively across cell membranes along a concentration gradient.",
+        question: "Which statement gives the complete, accurate AQA definition of diffusion?",
+        clue: "Check the direction of the gradient ('higher to lower') and whether it is a 'net' movement of particles.",
+        options: [
+          "The spreading out of particles of a gas or solute, resulting in a net movement from an area of higher concentration to an area of lower concentration.",
+          "The spreading out of particles of a gas or solute, resulting in a net movement from an area of lower concentration to an area of higher concentration.",
+          "The active movement of water molecules from a dilute solution to a concentrated solution across a cell wall.",
+          "The spreading out of particles of a gas or solute, requiring energy from respiration to move down a concentration gradient."
+        ],
+        correctIndex: 0,
+        examinerNote: "Diffusion is the net movement of particles from an area of higher concentration to an area of lower concentration (down a concentration gradient). It is completely passive and does NOT require energy from respiration (ruling out D)."
+      },
+      {
+        id: 9,
+        topic: "1.3 Transport in Cells: Osmosis",
+        tier: "AQA GCSE Biology (8461/8464) • Required Practical 3",
+        visualKey: "osmosis",
+        visualScale: "Potato Cylinder Investigation",
+        visualCaption: "In AQA Required Practical 3, potato cylinders placed in concentrated sucrose solution lose mass.",
+        question: "Which statement accurately explains why osmosis occurs between two solutions separated by a membrane?",
+        clue: "AQA prefers 'dilute solution to a more concentrated solution' across a 'partially permeable membrane' (not semi-permeable or cell wall).",
+        options: [
+          "Water moves from a dilute solution to a more concentrated solution through a partially permeable membrane.",
+          "Water moves from a more concentrated solution to a dilute solution through a partially permeable membrane.",
+          "Water moves from a dilute solution to a more concentrated solution through a fully permeable cell wall.",
+          "Sugar solute moves from a more concentrated solution to a dilute solution through a partially permeable membrane."
+        ],
+        correctIndex: 0,
+        examinerNote: "AQA's exact wording is: 'Osmosis is the diffusion of water from a dilute solution to a concentrated solution through a partially permeable membrane.' Note that only water moves by osmosis (ruling out D), and the plant cell wall is fully permeable (ruling out C)."
+      },
+      {
+        id: 10,
+        topic: "1.3 Transport in Cells: Active Transport",
+        tier: "AQA GCSE Biology (8461/8464) • Higher Tier",
+        visualKey: "activetransport",
+        visualScale: "Mineral Uptake Against Gradient",
+        visualCaption: "Root hair cells absorb dilute mineral ions (such as magnesium and nitrates) from the soil.",
+        question: "Why is active transport essential for root hair cells absorbing mineral ions from soil water?",
+        clue: "Compare the mineral concentration inside the root hair cell to the soil, and state where the required energy comes from.",
+        options: [
+          "The concentration of mineral ions is higher inside the root hair cell than in the soil, requiring energy from respiration to move them against the gradient.",
+          "The concentration of mineral ions is lower inside the root hair cell than in the soil, requiring energy from respiration to move them down the gradient.",
+          "The concentration of mineral ions is higher inside the root hair cell than in the soil, allowing ions to diffuse passively into the cell.",
+          "The concentration of water is higher inside the root hair cell than in the soil, requiring energy from photosynthesis to pump ions."
+        ],
+        correctIndex: 0,
+        examinerNote: "Mineral ions are usually more concentrated inside the root hair cell than in the dilute soil water. Therefore, they must be moved AGAINST the concentration gradient (low to high), which requires energy released by respiration."
+      }
+    ];
+
+    // Student Session & League State
+    const STORAGE_KEY = "aqa_cell_bio_league_v1";
+    let studentProfile = { name: "", className: "" };
+    let leagueRecords = [];
+    let currentLeagueTab = "individual";
+
+    // Quiz State
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreak = 0;
+    let answered = false;
+    let fiftyFiftyRemaining = 1;
+    let clueUsedThisQuestion = false;
+    let userHistory = [];
+    let quizStartTime = 0;
+    let totalQuizSeconds = 0;
+
+    // Timer State
+    const QUESTION_TIME = 45;
+    let timeLeft = QUESTION_TIME;
+    let timerEnabled = true;
+    let timerInterval = null;
+
+    // DOM Elements
+    const progressLabel = document.getElementById('progress-label');
+    const progressPercent = document.getElementById('progress-percent');
+    const progressBar = document.getElementById('progress-bar');
+    const streakCount = document.getElementById('streak-count');
+    const streakBadge = document.getElementById('streak-badge');
+    const scoreCount = document.getElementById('score-count');
+    const timerText = document.getElementById('timer-text');
+    const timerBar = document.getElementById('timer-bar');
+    const svgStage = document.getElementById('svg-stage');
+    const visualScale = document.getElementById('visual-scale');
+    const visualCaption = document.getElementById('visual-caption');
+    const specTag = document.getElementById('spec-tag');
+    const topicTag = document.getElementById('topic-tag');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackPanel = document.getElementById('feedback-panel');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackSubtitle = document.getElementById('feedback-subtitle');
+    const examinerNote = document.getElementById('examiner-note');
+    const nextBtn = document.getElementById('next-btn');
+    const btn5050 = document.getElementById('btn-5050');
+    const fiftyLeftSpan = document.getElementById('fifty-left');
+    const btnClue = document.getElementById('btn-clue');
+    const clueBox = document.getElementById('clue-box');
+    const clueText = document.getElementById('clue-text');
+
+    /**
+     * Populates class dropdowns on Login & League Filter and loads initial league records
+     */
+    function setupAppShell() {
+      const loginSelect = document.getElementById('student-class-select');
+      const filterSelect = document.getElementById('league-class-filter');
+
+      loginSelect.innerHTML = `<option value="" disabled selected>Choose your class...</option>`;
+      filterSelect.innerHTML = `<option value="ALL">All Classes (${CONFIG.CLASSES.length})</option>`;
+
+      CONFIG.CLASSES.forEach(cls => {
+        const opt1 = document.createElement('option');
+        opt1.value = cls;
+        opt1.textContent = cls;
+        loginSelect.appendChild(opt1);
+
+        const opt2 = document.createElement('option');
+        opt2.value = cls;
+        opt2.textContent = cls;
+        filterSelect.appendChild(opt2);
+      });
+
+      if (CONFIG.CLASS_PASSCODE && CONFIG.CLASS_PASSCODE.trim() !== "") {
+        document.getElementById('passcode-field-wrap').classList.remove('hidden');
+        document.getElementById('student-passcode-input').required = true;
+      }
+
+      loadLeagueRecords();
+    }
+
+    /**
+     * Generates realistic sample scores across Classes 1–10 when no live Google Sheet URL is set yet
+     */
+    function getSeedDemoRecords() {
+      const samples = [
+        { name: "Amelia R.", className: CONFIG.CLASSES[0] || "Class 1", score: 9, streak: 6, timeSeconds: 118, timestamp: Date.now() - 86400000 },
+        { name: "Leo K.", className: CONFIG.CLASSES[1] || "Class 2", score: 8, streak: 5, timeSeconds: 134, timestamp: Date.now() - 72000000 },
+        { name: "Sofia M.", className: CONFIG.CLASSES[2] || "Class 3", score: 10, streak: 10, timeSeconds: 142, timestamp: Date.now() - 65000000 },
+        { name: "Noah T.", className: CONFIG.CLASSES[3] || "Class 4", score: 7, streak: 4, timeSeconds: 155, timestamp: Date.now() - 50000000 },
+        { name: "Isla W.", className: CONFIG.CLASSES[4] || "Class 5", score: 8, streak: 6, timeSeconds: 129, timestamp: Date.now() - 42000000 },
+        { name: "Ethan B.", className: CONFIG.CLASSES[5] || "Class 6", score: 6, streak: 3, timeSeconds: 168, timestamp: Date.now() - 36000000 },
+        { name: "Chloe H.", className: CONFIG.CLASSES[6] || "Class 7", score: 9, streak: 7, timeSeconds: 149, timestamp: Date.now() - 28000000 },
+        { name: "Lucas D.", className: CONFIG.CLASSES[7] || "Class 8", score: 7, streak: 4, timeSeconds: 161, timestamp: Date.now() - 21000000 },
+        { name: "Freya S.", className: CONFIG.CLASSES[8] || "Class 9", score: 8, streak: 5, timeSeconds: 138, timestamp: Date.now() - 14000000 },
+        { name: "Oscar P.", className: CONFIG.CLASSES[9] || "Class 10", score: 9, streak: 8, timeSeconds: 124, timestamp: Date.now() - 7200000 }
+      ];
+      return samples;
+    }
+
+    /**
+     * Loads league records from Google Sheets (if configured) or localStorage
+     */
+    async function loadLeagueRecords() {
+      const localRaw = localStorage.getItem(STORAGE_KEY);
+      if (localRaw) {
+        try {
+          leagueRecords = JSON.parse(localRaw);
+        } catch (e) {
+          leagueRecords = getSeedDemoRecords();
+        }
+      } else {
+        leagueRecords = getSeedDemoRecords();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(leagueRecords));
+      }
+
+      if (CONFIG.GOOGLE_SCRIPT_URL && CONFIG.GOOGLE_SCRIPT_URL.trim() !== "") {
+        document.getElementById('league-data-source-label').textContent = "Live Cloud Sync Active • Ranked by Score → Fastest Time";
+        try {
+          const res = await fetch(CONFIG.GOOGLE_SCRIPT_URL);
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            leagueRecords = data;
+          }
+        } catch (err) {
+          console.warn("Could not fetch remote Google Sheet records, showing local cache:", err);
+        }
+      } else {
+        document.getElementById('league-data-source-label').textContent = "Local Browser Mode (Paste Google Script URL in CONFIG for multi-device sync)";
+      }
+    }
+
+    /**
+     * Saves a completed attempt locally and posts to Google Sheets if configured
+     */
+    async function submitScoreToLeague(entry) {
+      leagueRecords.push(entry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(leagueRecords));
+
+      const statusBadge = document.getElementById('submission-status-badge');
+      if (CONFIG.GOOGLE_SCRIPT_URL && CONFIG.GOOGLE_SCRIPT_URL.trim() !== "") {
+        statusBadge.textContent = "Syncing to Cloud League Table...";
+        try {
+          await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(entry)
+          });
+          statusBadge.textContent = "✓ Recorded on Live League Table";
+          statusBadge.className = "inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold";
+        } catch (err) {
+          statusBadge.textContent = "Saved Locally (Offline)";
+        }
+      } else {
+        statusBadge.textContent = "✓ Saved to League Table";
+        statusBadge.className = "inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold";
+      }
+    }
+
+    /**
+     * Handles Student Login Form Submission
+     */
+    function handleStudentLogin(event) {
+      event.preventDefault();
+      const nameVal = document.getElementById('student-name-input').value.trim();
+      const classVal = document.getElementById('student-class-select').value;
+      const errorBox = document.getElementById('login-error-box');
+
+      if (!nameVal || !classVal) {
+        errorBox.textContent = "Please enter your name and select your class.";
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      if (CONFIG.CLASS_PASSCODE && CONFIG.CLASS_PASSCODE.trim() !== "") {
+        const passVal = document.getElementById('student-passcode-input').value.trim();
+        if (passVal !== CONFIG.CLASS_PASSCODE.trim()) {
+          errorBox.textContent = "Incorrect Class Access PIN. Please check with your teacher.";
+          errorBox.classList.remove('hidden');
+          return;
+        }
+      }
+
+      errorBox.classList.add('hidden');
+      studentProfile = { name: nameVal, className: classVal };
+
+      // Update Header UI for active session
+      const infoSpan = document.getElementById('header-student-info');
+      const classBadge = document.getElementById('header-class-badge');
+      infoSpan.textContent = studentProfile.name;
+      infoSpan.classList.remove('hidden');
+      classBadge.textContent = studentProfile.className;
+      classBadge.classList.remove('hidden');
+
+      document.getElementById('login-screen').classList.add('hidden');
+      initQuiz(true);
+    }
+
+    /**
+     * Returns to Login Screen to switch student or class
+     */
+    function switchStudent() {
+      clearInterval(timerInterval);
+      document.getElementById('summary-screen').classList.add('hidden');
+      document.getElementById('quiz-workspace').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('flex');
+      document.getElementById('header-live-stats').classList.add('hidden');
+      document.getElementById('header-live-stats').classList.remove('flex');
+      document.getElementById('header-timer-track').classList.add('hidden');
+      document.getElementById('login-screen').classList.remove('hidden');
+    }
+
+    /**
+     * Shuffles an array in-place using Fisher-Yates algorithm
+     */
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /**
+     * Prepares questions with shuffled option positions so memorising letters isn't possible
+     */
+    function prepareQuestions(shuffleOptions = true) {
+      return QUESTIONS.map(q => {
+        const indexedOptions = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === q.correctIndex
+        }));
+        const finalOptions = shuffleOptions ? shuffleArray(indexedOptions) : indexedOptions;
+        return {
+          ...q,
+          preparedOptions: finalOptions
+        };
+      });
+    }
+
+    /**
+     * Initializes or restarts the quiz
+     */
+    function initQuiz(shuffleOptions = true) {
+      currentQuestions = prepareQuestions(shuffleOptions);
+      currentIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreak = 0;
+      fiftyFiftyRemaining = 1;
+      userHistory = [];
+      quizStartTime = Date.now();
+
+      updateHeaderStats();
+      document.getElementById('summary-screen').classList.add('hidden');
+      document.getElementById('quiz-workspace').classList.remove('hidden');
+
+      // Show live quiz header elements
+      const progWrap = document.getElementById('header-progress-wrap');
+      const statsWrap = document.getElementById('header-live-stats');
+      progWrap.classList.remove('hidden');
+      progWrap.classList.add('flex');
+      statsWrap.classList.remove('hidden');
+      statsWrap.classList.add('flex');
+      document.getElementById('header-timer-track').classList.remove('hidden');
+
+      renderQuestion();
+    }
+
+    /**
+     * Renders the current question, SVG visual, and 4 option cards
+     */
+    function renderQuestion() {
+      answered = false;
+      clueUsedThisQuestion = false;
+      const q = currentQuestions[currentIndex];
+
+      // Update Progress
+      const qNum = currentIndex + 1;
+      const pct = Math.round((qNum / currentQuestions.length) * 100);
+      progressLabel.textContent = `Question ${qNum} of ${currentQuestions.length}`;
+      progressPercent.textContent = `${pct}%`;
+      progressBar.style.width = `${pct}%`;
+
+      // Update Visual Panel
+      svgStage.innerHTML = SVG_DIAGRAMS[q.visualKey] || '';
+      visualScale.textContent = q.visualScale;
+      visualCaption.textContent = q.visualCaption;
+
+      // Update Question Metadata & Prompt
+      specTag.textContent = q.tier;
+      topicTag.textContent = q.topic;
+      questionText.textContent = q.question;
+
+      // Reset Lifelines
+      fiftyLeftSpan.textContent = fiftyFiftyRemaining;
+      btn5050.disabled = fiftyFiftyRemaining <= 0;
+      btnClue.disabled = false;
+      clueBox.classList.add('hidden');
+      clueText.textContent = q.clue;
+
+      // Hide Feedback Panel
+      feedbackPanel.classList.add('hidden');
+
+      // Render Option Buttons
+      const letters = ['A', 'B', 'C', 'D'];
+      optionsContainer.innerHTML = '';
+
+      q.preparedOptions.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.index = idx;
+        btn.onclick = () => selectOption(idx);
+        btn.className = `option-card group w-full text-left p-4 sm:p-4.5 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border-2 border-slate-700/90 hover:border-teal-400/70 transition-all duration-200 flex items-start gap-3.5 cursor-pointer shadow-md`;
+
+        btn.innerHTML = `
+          <span class="option-letter w-8 h-8 rounded-xl bg-slate-900 group-hover:bg-teal-500/20 border border-slate-600 group-hover:border-teal-400 text-slate-300 group-hover:text-teal-300 font-mono font-bold text-sm flex items-center justify-center shrink-0 transition-colors mt-0.5">
+            ${letters[idx]}
+          </span>
+          <span class="option-text text-sm sm:text-base text-slate-100 font-medium leading-snug flex-1">
+            ${opt.text}
+          </span>
+          <span class="option-status shrink-0 self-center"></span>
+        `;
+        optionsContainer.appendChild(btn);
+      });
+
+      // Start Question Timer
+      startTimer();
+    }
+
+    /**
+     * Handles selecting an answer or timer expiration
+     */
+    function selectOption(selectedIdx, timedOut = false) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timerInterval);
+
+      btn5050.disabled = true;
+      btnClue.disabled = true;
+
+      const q = currentQuestions[currentIndex];
+      const correctIdx = q.preparedOptions.findIndex(o => o.isCorrect);
+      const isCorrect = !timedOut && selectedIdx === correctIdx;
+
+      // Update Score & Streak
+      if (isCorrect) {
+        score++;
+        streak++;
+        if (streak > bestStreak) bestStreak = streak;
+      } else {
+        streak = 0;
+      }
+      updateHeaderStats();
+
+      // Record for Summary Review
+      userHistory.push({
+        question: q.question,
+        topic: q.topic,
+        userAnswer: timedOut ? "Time Expired (No Answer)" : q.preparedOptions[selectedIdx].text,
+        correctAnswer: q.preparedOptions[correctIdx].text,
+        isCorrect,
+        examinerNote: q.examinerNote
+      });
+
+      // Style all option cards
+      const cards = optionsContainer.querySelectorAll('.option-card');
+      cards.forEach((card, idx) => {
+        card.disabled = true;
+        card.classList.remove('hover:bg-slate-800', 'hover:border-teal-400/70', 'cursor-pointer');
+        const letterBox = card.querySelector('.option-letter');
+        const statusSlot = card.querySelector('.option-status');
+
+        if (idx === correctIdx) {
+          card.classList.remove('border-slate-700/90', 'bg-slate-800/90', 'opacity-40');
+          card.classList.add('border-emerald-500', 'bg-emerald-950/50', 'glow-emerald');
+          letterBox.classList.remove('bg-slate-900', 'border-slate-600', 'text-slate-300');
+          letterBox.classList.add('bg-emerald-500', 'border-emerald-400', 'text-slate-950');
+          statusSlot.innerHTML = `<svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`;
+        } else if (!timedOut && idx === selectedIdx) {
+          card.classList.remove('border-slate-700/90', 'bg-slate-800/90');
+          card.classList.add('border-rose-500', 'bg-rose-950/50', 'glow-crimson');
+          letterBox.classList.remove('bg-slate-900', 'border-slate-600', 'text-slate-300');
+          letterBox.classList.add('bg-rose-500', 'border-rose-400', 'text-white');
+          statusSlot.innerHTML = `<svg class="w-6 h-6 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`;
+        } else {
+          card.classList.add('opacity-50');
+        }
+      });
+
+      // Configure Feedback Panel
+      feedbackPanel.classList.remove('hidden', 'bg-emerald-950/40', 'border-emerald-500/40', 'bg-rose-950/40', 'border-rose-500/40');
+      if (isCorrect) {
+        feedbackPanel.classList.add('bg-emerald-950/40', 'border-emerald-500/40');
+        feedbackIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0';
+        feedbackIcon.innerHTML = `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`;
+        feedbackTitle.textContent = streak >= 3 ? `Spot On! 🔥 ${streak} in a row!` : 'Correct! Mark-Scheme Precision';
+        feedbackTitle.className = 'font-bold text-base text-emerald-300';
+        feedbackSubtitle.textContent = '+1 Mark awarded';
+      } else {
+        feedbackPanel.classList.add('bg-rose-950/40', 'border-rose-500/40');
+        feedbackIcon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0';
+        feedbackIcon.innerHTML = `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`;
+        feedbackTitle.textContent = timedOut ? "Time's Up!" : 'Watch Out — Classic AQA Distractor Trap';
+        feedbackTitle.className = 'font-bold text-base text-rose-300';
+        feedbackSubtitle.textContent = 'Check the highlighted green mark-scheme wording above';
+      }
+
+      examinerNote.textContent = q.examinerNote;
+      nextBtn.textContent = currentIndex === currentQuestions.length - 1 ? 'View Final Grade Report →' : 'Next Question →';
+    }
+
+    /**
+     * 50/50 Lifeline: Eliminates 2 incorrect options
+     */
+    function useFiftyFifty() {
+      if (answered || fiftyFiftyRemaining <= 0) return;
+      const q = currentQuestions[currentIndex];
+      const incorrectIndices = q.preparedOptions
+        .map((opt, idx) => (!opt.isCorrect ? idx : -1))
+        .filter(idx => idx !== -1);
+
+      const toHide = shuffleArray(incorrectIndices).slice(0, 2);
+      const cards = optionsContainer.querySelectorAll('.option-card');
+
+      toHide.forEach(idx => {
+        cards[idx].disabled = true;
+        cards[idx].classList.add('opacity-25', 'pointer-events-none', 'line-through');
+      });
+
+      fiftyFiftyRemaining--;
+      fiftyLeftSpan.textContent = fiftyFiftyRemaining;
+      btn5050.disabled = true;
+    }
+
+    /**
+     * Examiner Clue Lifeline
+     */
+    function useMarkSchemeClue() {
+      if (answered || clueUsedThisQuestion) return;
+      clueUsedThisQuestion = true;
+      clueBox.classList.remove('hidden');
+      btnClue.disabled = true;
+    }
+
+    /**
+     * Advances to next question or finishes quiz
+     */
+    function nextQuestion() {
+      if (currentIndex < currentQuestions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showSummary();
+      }
+    }
+
+    /**
+     * Updates top bar score and glowing streak badge
+     */
+    function updateHeaderStats() {
+      scoreCount.textContent = `${score}/${QUESTIONS.length}`;
+      streakCount.textContent = streak;
+      if (streak >= 2) {
+        streakBadge.classList.add('border-amber-400', 'bg-amber-950/40', 'shadow-md', 'shadow-amber-500/20');
+      } else {
+        streakBadge.classList.remove('border-amber-400', 'bg-amber-950/40', 'shadow-md', 'shadow-amber-500/20');
+      }
+    }
+
+    /**
+     * Countdown Timer Controls
+     */
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = QUESTION_TIME;
+      updateTimerUI();
+
+      if (!timerEnabled) return;
+
+      timerInterval = setInterval(() => {
+        if (answered || !timerEnabled) return;
+        timeLeft--;
+        updateTimerUI();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          selectOption(-1, true);
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      if (!timerEnabled) {
+        timerText.textContent = 'OFF';
+        timerBar.style.width = '100%';
+        timerBar.className = 'h-full bg-slate-600 transition-all duration-300';
+        return;
+      }
+      timerText.textContent = `${timeLeft}s`;
+      const pct = (timeLeft / QUESTION_TIME) * 100;
+      timerBar.style.width = `${pct}%`;
+
+      if (timeLeft <= 10) {
+        timerBar.className = 'h-full bg-rose-500 transition-all duration-200 ease-linear';
+      } else {
+        timerBar.className = 'h-full bg-gradient-to-r from-purple-500 to-teal-400 transition-all duration-200 ease-linear';
+      }
+    }
+
+    function toggleTimerMode() {
+      timerEnabled = !timerEnabled;
+      if (timerEnabled && !answered) {
+        startTimer();
+      } else {
+        clearInterval(timerInterval);
+        updateTimerUI();
+      }
+    }
+
+    /**
+     * Displays End-of-Quiz Summary, Grade Estimate & Submits to League Table
+     */
+    function showSummary() {
+      clearInterval(timerInterval);
+      totalQuizSeconds = Math.max(10, Math.round((Date.now() - quizStartTime) / 1000));
+
+      document.getElementById('quiz-workspace').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('flex');
+      document.getElementById('header-timer-track').classList.add('hidden');
+      document.getElementById('summary-screen').classList.remove('hidden');
+
+      const pct = Math.round((score / QUESTIONS.length) * 100);
+      document.getElementById('summary-student-pill').textContent = `${studentProfile.name} • ${studentProfile.className}`;
+      document.getElementById('final-score').textContent = `${score} / ${QUESTIONS.length}`;
+      document.getElementById('final-percentage').textContent = `${pct}% Accuracy`;
+      document.getElementById('final-streak').textContent = bestStreak;
+      document.getElementById('final-time').textContent = `${totalQuizSeconds}s`;
+
+      // Submit entry to League Table
+      submitScoreToLeague({
+        name: studentProfile.name,
+        className: studentProfile.className,
+        score: score,
+        streak: bestStreak,
+        timeSeconds: totalQuizSeconds,
+        timestamp: Date.now()
+      });
+
+      // AQA Grade Estimator tailored to tough Higher-tier distractors
+      let grade = 'Grade 4–5';
+      let descriptor = 'Solid Foundation';
+      let verdict = 'You have a good grasp of the basics. Focus on the exact examiner phrasing below to turn near-misses into full marks.';
+
+      if (score === 10) {
+        grade = 'Grade 9';
+        descriptor = 'Flawless Precision';
+        verdict = 'Outstanding! Every single mark-scheme nuance—from resolving power to active transport gradients—was spot on.';
+      } else if (score >= 8) {
+        grade = 'Grade 8–9';
+        descriptor = 'Top-Tier Mastery';
+        verdict = 'Brilliant work! You avoided almost every classic AQA distractor trap.';
+      } else if (score >= 6) {
+        grade = 'Grade 6–7';
+        descriptor = 'Strong Higher Tier';
+        verdict = 'Very strong result on tough Higher-tier questions. Check the notes below on any distractors that caught you out.';
+      }
+
+      document.getElementById('final-grade').textContent = grade;
+      document.getElementById('grade-descriptor').textContent = descriptor;
+      document.getElementById('summary-verdict').textContent = verdict;
+
+      const missedCount = userHistory.filter(h => !h.isCorrect).length;
+      document.getElementById('missed-count-badge').textContent = missedCount === 0
+        ? '0 Questions Missed!'
+        : `${missedCount} Question${missedCount > 1 ? 's' : ''} to Review`;
+
+      // Render Full Breakdown List
+      const reviewList = document.getElementById('review-list');
+      reviewList.innerHTML = '';
+
+      userHistory.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = `p-4 rounded-2xl border ${item.isCorrect ? 'bg-slate-900/70 border-emerald-500/30' : 'bg-rose-950/20 border-rose-500/40'}`;
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider ${item.isCorrect ? 'text-emerald-400' : 'text-rose-400'}">
+              Q${idx + 1} • ${item.topic} — ${item.isCorrect ? 'Correct (+1)' : 'Missed'}
+            </span>
+          </div>
+          <p class="text-sm font-bold text-white mb-2.5">${item.question}</p>
+          <div class="space-y-1.5 text-xs">
+            ${!item.isCorrect ? `
+              <div class="p-2 rounded-lg bg-rose-950/60 border border-rose-500/30 text-rose-200">
+                <span class="font-bold">Your Choice:</span> ${item.userAnswer}
+              </div>
+            ` : ''}
+            <div class="p-2 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-200">
+              <span class="font-bold">AQA Mark-Scheme Answer:</span> ${item.correctAnswer}
+            </div>
+            <p class="text-slate-300 pt-1 leading-relaxed">
+              <span class="font-semibold text-teal-400">Examiner Note:</span> ${item.examinerNote}
+            </p>
+          </div>
+        `;
+        reviewList.appendChild(card);
+      });
+    }
+
+    /**
+     * LEAGUE TABLE MODAL & RANKING LOGIC
+     */
+    function openLeagueModal() {
+      document.getElementById('league-modal').classList.remove('hidden');
+      renderLeagueViews();
+    }
+
+    function closeLeagueModal() {
+      document.getElementById('league-modal').classList.add('hidden');
+    }
+
+    async function refreshLeagueData() {
+      await loadLeagueRecords();
+      renderLeagueViews();
+    }
+
+    function switchLeagueTab(tab) {
+      currentLeagueTab = tab;
+      const btnInd = document.getElementById('tab-individual');
+      const btnCls = document.getElementById('tab-classes');
+      const viewInd = document.getElementById('view-individual-table');
+      const viewCls = document.getElementById('view-classes-table');
+      const filterWrap = document.getElementById('league-class-filter-wrap');
+
+      if (tab === 'individual') {
+        btnInd.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer bg-teal-500 text-slate-950";
+        btnCls.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-slate-400 hover:text-white";
+        viewInd.classList.remove('hidden');
+        viewCls.classList.add('hidden');
+        filterWrap.classList.remove('hidden');
+      } else {
+        btnCls.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer bg-purple-500 text-white";
+        btnInd.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-slate-400 hover:text-white";
+        viewCls.classList.remove('hidden');
+        viewInd.classList.add('hidden');
+        filterWrap.classList.add('hidden');
+      }
+      renderLeagueViews();
+    }
+
+    function renderLeagueViews() {
+      const selectedClass = document.getElementById('league-class-filter').value;
+      const indTbody = document.getElementById('individual-tbody');
+      const clsTbody = document.getElementById('classes-tbody');
+
+      // 1. Individual Leaderboard (Sorted by Score DESC, Time ASC, Streak DESC)
+      const filtered = selectedClass === "ALL"
+        ? [...leagueRecords]
+        : leagueRecords.filter(r => r.className === selectedClass);
+
+      filtered.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        if (a.timeSeconds !== b.timeSeconds) return a.timeSeconds - b.timeSeconds;
+        return b.streak - a.streak;
+      });
+
+      indTbody.innerHTML = '';
+      if (filtered.length === 0) {
+        indTbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 text-sm">No scores recorded for ${selectedClass} yet.</td></tr>`;
+      } else {
+        filtered.forEach((row, index) => {
+          const rank = index + 1;
+          const isCurrentUser = studentProfile.name && row.name.toLowerCase() === studentProfile.name.toLowerCase() && row.className === studentProfile.className;
+          let rankBadge = `<span class="font-mono text-slate-400 font-bold">#${rank}</span>`;
+          if (rank === 1) rankBadge = `<span class="px-2 py-0.5 rounded-md bg-amber-400/20 border border-amber-400/50 text-amber-300 font-mono font-extrabold text-xs">🥇 1st</span>`;
+          if (rank === 2) rankBadge = `<span class="px-2 py-0.5 rounded-md bg-slate-300/20 border border-slate-300/40 text-slate-200 font-mono font-extrabold text-xs">🥈 2nd</span>`;
+          if (rank === 3) rankBadge = `<span class="px-2 py-0.5 rounded-md bg-orange-500/20 border border-orange-500/40 text-orange-300 font-mono font-extrabold text-xs">🥉 3rd</span>`;
+
+          const tr = document.createElement('tr');
+          tr.className = isCurrentUser ? "bg-teal-950/40" : "hover:bg-slate-800/40 transition";
+          tr.innerHTML = `
+            <td class="py-3 px-4 whitespace-nowrap">${rankBadge}</td>
+            <td class="py-3 px-4 font-bold text-white">
+              ${escapeHtml(row.name)}
+              ${isCurrentUser ? '<span class="ml-1.5 text-[10px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 uppercase">You</span>' : ''}
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-semibold">${escapeHtml(row.className)}</span>
+            </td>
+            <td class="py-3 px-4 text-right font-mono font-extrabold text-teal-400">${row.score}/10</td>
+            <td class="py-3 px-4 text-right font-mono text-amber-400 text-xs">🔥 ${row.streak}</td>
+            <td class="py-3 px-4 text-right font-mono text-slate-300 text-xs">${row.timeSeconds}s</td>
+          `;
+          indTbody.appendChild(tr);
+        });
+      }
+
+      // 2. Class vs. Class Standings across CONFIG.CLASSES
+      const classStats = CONFIG.CLASSES.map(clsName => {
+        const entries = leagueRecords.filter(r => r.className === clsName);
+        if (entries.length === 0) {
+          return { className: clsName, attempts: 0, avgScore: 0, topScore: 0 };
+        }
+        const total = entries.reduce((sum, e) => sum + Number(e.score || 0), 0);
+        const top = Math.max(...entries.map(e => Number(e.score || 0)));
+        return {
+          className: clsName,
+          attempts: entries.length,
+          avgScore: +(total / entries.length).toFixed(1),
+          topScore: top
+        };
+      });
+
+      classStats.sort((a, b) => {
+        if (b.avgScore !== a.avgScore) return b.avgScore - a.avgScore;
+        if (b.topScore !== a.topScore) return b.topScore - a.topScore;
+        return b.attempts - a.attempts;
+      });
+
+      clsTbody.innerHTML = '';
+      classStats.forEach((cls, index) => {
+        const rank = index + 1;
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-800/40 transition";
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono font-bold ${rank === 1 ? 'text-amber-300' : 'text-slate-400'}">#${rank}</td>
+          <td class="py-3 px-4 font-bold text-white">${escapeHtml(cls.className)}</td>
+          <td class="py-3 px-4 text-right font-mono text-slate-300">${cls.attempts}</td>
+          <td class="py-3 px-4 text-right font-mono font-extrabold text-purple-400">${cls.attempts > 0 ? cls.avgScore + ' / 10' : '—'}</td>
+          <td class="py-3 px-4 text-right font-mono font-bold text-teal-400">${cls.attempts > 0 ? cls.topScore + ' / 10' : '—'}</td>
+        `;
+        clsTbody.appendChild(tr);
+      });
+    }
+
+    function resetLocalDemoData() {
+      localStorage.removeItem(STORAGE_KEY);
+      loadLeagueRecords().then(() => renderLeagueViews());
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    function restartQuiz(shuffle) {
+      initQuiz(shuffle);
+    }
+
+    // Boot application on load (starts on Student Login Screen)
+    window.addEventListener('DOMContentLoaded', () => {
+      setupAppShell();
+    });
+  </script>
+</body>
+</html>
